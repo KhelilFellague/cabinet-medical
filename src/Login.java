@@ -57,12 +57,6 @@ public class Login extends JFrame {
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/images/med2.png")));
 		panel.add(lblNewLabel);
-		
-		//creation des fenetres: 
-		medecinPage = new MedecinPage();
-		secretairePage = new SecretairePage();
-		
-
 		Button button = new Button("LOGIN");
 		button.setForeground(SystemColor.text);
 		button.setBackground(new Color(21,47,82));
@@ -95,10 +89,12 @@ public class Login extends JFrame {
 							String role_uti = rs.getString("role");
 							// Debut if medecin ou secretaire
 							if(role_uti.equals("Medecin")) {
-								menuClicked(medecinPage);
+								medecinPage = new MedecinPage();	
+								medecinPage.setVisible(true);
 							}
 							else {
-								menuClicked(secretairePage);
+								secretairePage = new SecretairePage();
+								secretairePage.setVisible(true);
 							}
 							//fin du if medecin ou secretaire
 						}
