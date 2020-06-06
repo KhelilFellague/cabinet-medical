@@ -1,5 +1,19 @@
 # cabinet-medical
 mini projet génie logiciel - gestion d'un cabinet medical
 
-
+# medecin icon
 ![med](https://user-images.githubusercontent.com/65179509/83024916-1dacea80-a02f-11ea-8caf-9ceb5887d36c.png)
+# userlogin  icon 
+![userlogin ](https://user-images.githubusercontent.com/65179509/83942384-32d60600-a7f3-11ea-8868-ffd27e52cb93.jpg)
+# passwordlogin login 
+![passwordLogin](https://user-images.githubusercontent.com/65179509/83942392-497c5d00-a7f3-11ea-8287-033a2db75643.jpg)
+# home icon 
+![home_icon](https://user-images.githubusercontent.com/65179509/83942312-a1ff2a80-a7f2-11ea-8f9a-2a61847add7c.jpg)
+# decennexion icon 
+![deconnexion_icon](https://user-images.githubusercontent.com/65179509/83942412-77fa3800-a7f3-11ea-983d-e3361df356ac.png)
+# diagnostic icon 
+![diagnostic_icon ](https://user-images.githubusercontent.com/65179509/83942453-ba237980-a7f3-11ea-9989-5a19ed80e716.png)
+# statisqtique icon
+![stat_icon](https://user-images.githubusercontent.com/65179509/83942397-5ef18700-a7f3-11ea-92ef-5a33e547dcc7.png)
+# gestion des patients icon
+![patient_icon](https://user-images.githubusercontent.com/65179509/83942425-906a5280-a7f3-11ea-8521-08da4d58ca1a.png)
