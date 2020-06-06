@@ -13,17 +13,17 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
-/**
- * @author Assia,Ines
- *
- */
 @SuppressWarnings("serial")
 public class Login extends JFrame {
 
 	private JFrame frame;
 	private JTextField textField;
 	private JPasswordField textField_1;
+	
+	private MedecinPage medecinPage;
+	private SecretairePage secretairePage;
 
 
 	//pour la connexion 
@@ -48,21 +48,25 @@ public class Login extends JFrame {
 		getFrame().getContentPane().setBackground(Color.WHITE);
 		getFrame().getContentPane().setLayout(null);
 
-		JPanel panel = new JPanel();
+		JPanel panel = 	new JPanel();
 		panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panel.setBackground(Color.DARK_GRAY);
-		panel.setBounds(0, 0, 316, 471);
+		panel.setBounds(0, -11, 316, 491);
 		getFrame().getContentPane().add(panel);
 
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("docteur.png")));
+		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/images/med2.png")));
 		panel.add(lblNewLabel);
+		
+		//creation des fenetres: 
+		medecinPage = new MedecinPage();
+		secretairePage = new SecretairePage();
+		
 
 		Button button = new Button("LOGIN");
 		button.setForeground(SystemColor.text);
 		button.setBackground(new Color(21,47,82));
 		button.setBounds(352, 315, 305, 44);
-
 		button.addActionListener(new ActionListener() {
 
 			// action performed du boutton login			
@@ -91,14 +95,10 @@ public class Login extends JFrame {
 							String role_uti = rs.getString("role");
 							// Debut if medecin ou secretaire
 							if(role_uti.equals("Medecin")) {
-								MedecinPage med = new MedecinPage(); 
-								med.setVisible(true);
-								setVisible(false);
+								menuClicked(medecinPage);
 							}
 							else {
-								SecretairePage sec = new SecretairePage(); 
-								sec.setVisible(true);
-								setVisible(false);
+								menuClicked(secretairePage);
 							}
 							//fin du if medecin ou secretaire
 						}
@@ -129,11 +129,11 @@ public class Login extends JFrame {
 		getFrame().getContentPane().add(separator);
 
 		JLabel lblNomDutilisateur = new JLabel("Mot de passe");
-		lblNomDutilisateur.setBounds(352, 164, 222, 44);
+		lblNomDutilisateur.setBounds(386, 163, 222, 44);
 		getFrame().getContentPane().add(lblNomDutilisateur);
 
 		JLabel lblMotDePasse = new JLabel("Nom d'utilisateur");
-		lblMotDePasse.setBounds(352, 59, 222, 44);
+		lblMotDePasse.setBounds(386, 59, 222, 44);
 		getFrame().getContentPane().add(lblMotDePasse);
 
 		textField_1 = new JPasswordField();
@@ -144,18 +144,32 @@ public class Login extends JFrame {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(352, 255, 305, 11);
 		getFrame().getContentPane().add(separator_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(Login.class.getResource("/images/userLogin.png")));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(338, 59, 56, 36);
+		frame.getContentPane().add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("");
+		lblNewLabel_1_1.setIcon(new ImageIcon(Login.class.getResource("/images/passwordLogin.png")));
+		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1.setBounds(334, 163, 56, 36);
+		frame.getContentPane().add(lblNewLabel_1_1);
 		getFrame().setBackground(Color.WHITE);
 		getFrame().setBounds(100, 100, 714, 510);
 		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);}
-	//getters + setters 
-	public JFrame getFrame() {
-		return frame;
-	}
+	    //getters + setters 
+	    public JFrame getFrame() {
+		    return frame;
+	    }
 
-	public void setFrame(JFrame frame) {
-		this.frame = frame;
-	}
-
-
-
+	    public void setFrame(JFrame frame) {
+	     	this.frame = frame;
+	    }
+	    public void menuClicked(JFrame frame) {
+			medecinPage.setVisible(false);
+			secretairePage.setVisible(false);
+			frame.setVisible(true);
+		}
 }
