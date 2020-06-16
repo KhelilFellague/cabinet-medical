@@ -19,3 +19,5 @@ mini projet génie logiciel - gestion d'un cabinet medical
 ![patient_icon](https://user-images.githubusercontent.com/65179509/83942425-906a5280-a7f3-11ea-8521-08da4d58ca1a.png)
 # secretaire icon
 ![secretary1](https://user-images.githubusercontent.com/65179509/84831705-1bd1b800-b02c-11ea-8752-007350cce8a0.png)
+# visites icon 
+![calendar1](https://user-images.githubusercontent.com/65179509/84831803-4e7bb080-b02c-11ea-86bd-f7296c55b327.png)
