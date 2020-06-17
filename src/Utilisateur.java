@@ -1,4 +1,4 @@
-
+package Models;
 /**
  * @author Assia, Ines
  *
@@ -11,8 +11,7 @@ public class Utilisateur {
 	private String prenom;
 	private int num_tel;
 	private String email;
-	private RoleUser role;
-	public Utilisateur(int id_user, String login, String mdp, String nom, String prenom, int num_tel, String email,RoleUser role) {
+	public Utilisateur(int id_user, String login, String mdp, String nom, String prenom, int num_tel, String email) {
 		super();
 		this.id_user = id_user;
 		this.login = login;
@@ -21,7 +20,11 @@ public class Utilisateur {
 		this.prenom = prenom;
 		this.num_tel = num_tel;
 		this.email = email;
-		this.role = role;
+
+	}
+
+	public Utilisateur() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getId_user() {
@@ -67,10 +70,4 @@ public class Utilisateur {
 		this.email = email;
 	} 
 	
-	public RoleUser getRole() {
-		return role;
-	}
-	public void setRole(RoleUser role) {
-		this.role = role;
-	}
 }
