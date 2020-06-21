@@ -16,11 +16,11 @@ public class Patient {
 	private Date date_naissance;
 	private String sexe;
 	private String adresse;
-	private int num_tel;
+	private String num_tel;
 	private String email;
-	private ArrayList<Rdv> rdvPatient = new ArrayList<Rdv>();
+	private ArrayList<Rdv> rdvPatient ;
 	public Patient(int id_patient, String nom, String prenom, Date date_naissance, String sexe, String adresse,
-			int num_tel, String email) {
+			String num_tel, String email) {
 		super();
 		this.id_patient = id_patient;
 		this.nom = nom;
@@ -30,9 +30,22 @@ public class Patient {
 		this.adresse = adresse;
 		this.num_tel = num_tel;
 		this.email = email;
+		this.rdvPatient = new ArrayList<Rdv>();
 	}
 	public Patient() {
 
+	}
+	public Patient(String nom, String prenom, Date date_naissance, String sexe, String adresse,
+			String num_tel, String email) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.date_naissance = date_naissance;
+		this.sexe = sexe;
+		this.adresse = adresse;
+		this.num_tel = num_tel;
+		this.email = email;
+		
 	}
 	public int getId_patient() {
 		return id_patient;
@@ -70,10 +83,10 @@ public class Patient {
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
-	public int getNum_tel() {
+	public String getNum_tel() {
 		return num_tel;
 	}
-	public void setNum_tel(int num_tel) {
+	public void setNum_tel(String num_tel) {
 		this.num_tel = num_tel;
 	}
 	public String getEmail() {
@@ -89,11 +102,17 @@ public class Patient {
 	public void setRdvPatient(ArrayList<Rdv> rdvPatient) {
 		this.rdvPatient = rdvPatient;
 	}  
+	
 
+	@Override
+	public String toString() {
+		return "Patient [id_patient=" + id_patient + ", nom=" + nom + ", prenom=" + prenom + ", date_naissance="
+				+ date_naissance + ", sexe=" + sexe + ", adresse=" + adresse + ", num_tel=" + num_tel + ", email="
+				+ email +  "]";
+	}
 	public static Patient ReadId(int id_patient) {
 
 		try {
-			System.out.println("AZUUUUUUL try du patient 1");
 			Connection con = Connexion.getConnection();
 			PreparedStatement pst = con.prepareStatement("Select * from Patient where id_patient = ? ");
 			pst.setInt(1, id_patient);
@@ -101,16 +120,13 @@ public class Patient {
 
 			if(rs.next()) {
 				Patient patient = new Patient();
-				System.out.println("AZUUUUUUL rs.next du Patient 1");
 				patient.setId_patient(rs.getInt("id_patient"));
 				patient.setNom(rs.getString("nom"));
 				patient.setPrenom(rs.getString("prenom"));
 				patient.setDate_naissance(rs.getDate("date_naissance"));
 				patient.setAdresse(rs.getString("adresse"));
-				patient.setNum_tel(rs.getInt("num_tel"));
+				patient.setNum_tel(rs.getString("num_tel"));
 				patient.setEmail(rs.getString("email"));
-
-				System.out.println("AZUUUUUUL FIN rs next Patient 1");
 				return patient;
 			}
 		} catch (SQLException ex) {
@@ -123,25 +139,20 @@ public class Patient {
 	public static Patient ReadString(String s) {
 
 		try {
-			System.out.println("AZUUUUUUL try du patient 1");
 			Connection con = Connexion.getConnection();
-			PreparedStatement pst = con.prepareStatement("Select * from Patient where (nom = ? or prenom = ?) ");
+			PreparedStatement pst = con.prepareStatement("Select * from Patient WHERE nom = ? ");
 			pst.setString(1, s);
-			pst.setString(2, s);
 			ResultSet rs = pst.executeQuery();
 
 			if(rs.next()) {
 				Patient patient = new Patient();
-				System.out.println("AZUUUUUUL rs.next du Patient 1");
 				patient.setId_patient(rs.getInt("id_patient"));
 				patient.setNom(rs.getString("nom"));
 				patient.setPrenom(rs.getString("prenom"));
 				patient.setDate_naissance(rs.getDate("date_naissance"));
 				patient.setAdresse(rs.getString("adresse"));
-				patient.setNum_tel(rs.getInt("num_tel"));
+				patient.setNum_tel(rs.getString("num_tel"));
 				patient.setEmail(rs.getString("email"));
-
-				System.out.println("AZUUUUUUL FIN rs next Patient 1");
 				return patient;
 			}
 		} catch (SQLException ex) {
@@ -163,7 +174,6 @@ public class Patient {
 			PreparedStatement pst = con.prepareStatement("Select * from Patient  ");
 			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
-
 				Patient patient = new Patient();
 
 				patient.setId_patient(rs.getInt("id_patient"));
@@ -171,7 +181,7 @@ public class Patient {
 				patient.setPrenom(rs.getString("prenom"));
 				patient.setDate_naissance(rs.getDate("date_naissance"));
 				patient.setAdresse(rs.getString("adresse"));
-				patient.setNum_tel(rs.getInt("num_tel"));
+				patient.setNum_tel(rs.getString("num_tel"));
 				patient.setEmail(rs.getString("email"));
 
 				patients.add(patient);
@@ -191,13 +201,16 @@ public class Patient {
 		try {  String insertQuery = "INSERT INTO Patient(NOM, PRENOM, "
 				+ " DATE_NAISSANCE ,  SEXE ,  ADRESSE, NUM_TEL, EMAIL) VALUES("
 				+ "'" + p.getNom()             + "', "
-				+ "'" + p.getDate_naissance()  + "', "
+				+ "'" + p.getPrenom()             + "', "
+				//+ "'" + p.getDate_naissance()  + "', "
+				+ "DATE '" + p.getDate_naissance()  + "', "
 				+ "'" + p.getSexe()            + "', "
 				+ "'" + p.getAdresse()         + "', "
-				+ "'" + p.getNum_tel()         + "', "
-				+ "'" + p.getEmail()           + "', "
+			    + "'" + p.getNum_tel()   + "', "
+				+ "'" + p.getEmail()           + "' "
 
-                             + ");";
+                             + ")";
+		System.out.println(insertQuery);
 
 		int rowsInserted;
 		Connection con = Connexion.getConnection();
@@ -208,7 +221,7 @@ public class Patient {
 		}else return false;
 		}
 		catch (Exception ex) {
-			System.out.println("Problem in all - create" + ex);
+			System.out.println("Problem in  create" + ex);
 			return false;
 		}
 
@@ -238,7 +251,7 @@ public class Patient {
 				+ "sexe = '" + p.getSexe()                       + "', "
 				+ "adresse = '" + p.getAdresse()                  + "', "
 				+ "num_tel = '" + p.getNum_tel()                  + "', "
-				+ "email = '" + p.getEmail()                    + "', "
+				+ "email = '" + p.getEmail()                    + "' "
 
                              + ");"
                              + "WHERE id_patient = '" + p.getId_patient()+ "';";
@@ -251,7 +264,7 @@ public class Patient {
 		}else return false;
 
 		} catch (Exception ex) {
-			System.out.println("Problem in all - update" + ex);
+			System.out.println("Problem in  update" + ex);
 			return false;
 		}
 
@@ -259,16 +272,16 @@ public class Patient {
 
 	public static boolean delete(Patient p) {
 		try{ String deleteQuery = "DELETE FROM Patient "
-				+ "WHERE id_patient = " + p.getId_patient()+ ";";
+				+ "WHERE id_patient = " + p.getId_patient();
 		int rowsInserted;
 		Connection con = Connexion.getConnection();
 		PreparedStatement pst = con.prepareStatement(deleteQuery);
 		rowsInserted = pst.executeUpdate();
 		if (rowsInserted > 0) {
-			System.out.println("un patient a ete supprime"); return true;
+			 return true;
 		}else return false;
 		} catch (Exception ex) {
-			System.out.println("Problem in all - delete" + ex);
+			System.out.println("Problem in delete" + ex);
 			return false;
 		}
 	}

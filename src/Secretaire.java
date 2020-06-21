@@ -16,8 +16,8 @@ public class Secretaire extends Utilisateur{
 	private ArrayList<Patient> patients = new ArrayList<Patient>();
 	private ArrayList<Rdv> rdvs = new ArrayList<Rdv>();
 
-	public Secretaire(int id_user, String login, String mdp, String nom, String prenom, int num_tel, String email) {
-		super(id_user, login, mdp, nom, prenom, num_tel, email);
+	public Secretaire(int id_user, String login, String mdp, String nom, String prenom,String adresse, int num_tel, String email) {
+		super(id_user, login, mdp, nom, prenom,adresse, num_tel, email);
 	}
 	public Secretaire() {
 		super();
@@ -32,7 +32,6 @@ public class Secretaire extends Utilisateur{
  public static Secretaire Read(String login, String mdp) {
         
      try { 
-    	 System.out.println("AZUUUUUUL try secretaire 1");
     	 Secretaire secretaire = new Secretaire();   
      	Connection con = Connexion.getConnection();
 		PreparedStatement pst = con.prepareStatement("Select * from Secretaire where login = ? and mdp = ?");
@@ -41,16 +40,14 @@ public class Secretaire extends Utilisateur{
 		ResultSet rs = pst.executeQuery();
    
             if(rs.next()){
-            	 System.out.println("AZUUUUUUL rs next secretaire 1");	
             secretaire.setId_user(rs.getInt("id_user"));
 			secretaire.setLogin(rs.getString("login"));
 			secretaire.setMdp(rs.getString("mdp"));
 			secretaire.setNom(rs.getString("nom"));
 			secretaire.setPrenom(rs.getString("prenom"));
-			secretaire.setPrenom(rs.getString("adresse"));
+			secretaire.setAdresse(rs.getString("adresse"));
 			secretaire.setNum_tel(rs.getInt("num_tel"));
 			secretaire.setEmail(rs.getString("email"));
-			System.out.println("AZUUUUUUL FIN rs next secretaire 1");
 			return secretaire;}
         } catch (SQLException ex) {
             System.out.println("Error : Secretaire.Read()" + ex);

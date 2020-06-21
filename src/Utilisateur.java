@@ -9,15 +9,17 @@ public class Utilisateur {
 	private String mdp;
 	private String nom;
 	private String prenom;
+	private String adresse;
 	private int num_tel;
 	private String email;
-	public Utilisateur(int id_user, String login, String mdp, String nom, String prenom, int num_tel, String email) {
+	public Utilisateur(int id_user, String login, String mdp, String nom, String prenom,String adresse, int num_tel, String email) {
 		super();
 		this.id_user = id_user;
 		this.login = login;
 		this.mdp = mdp;
 		this.nom = nom;
 		this.prenom = prenom;
+		this.setAdresse(adresse); 
 		this.num_tel = num_tel;
 		this.email = email;
 
@@ -68,6 +70,14 @@ public class Utilisateur {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
 	} 
 	
 }
